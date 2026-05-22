@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopee Live Official</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:white;
+}
+
+.container{
+  width:100%;
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 20px rgba(255,0,85,0.25);
+}
+
+h1{
+  text-align:center;
+  color:#ff0055;
+  margin-bottom:10px;
+}
+
+.desc{
+  text-align:center;
+  color:#bbb;
+  font-size:14px;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+
+.input-box{
+  margin-bottom:15px;
+}
+
+.input-box label{
+  display:block;
+  margin-bottom:7px;
+  font-size:14px;
+}
+
+.input-box input,
+.input-box select{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#262626;
+  color:white;
+}
+
+.tab{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tab button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#2a2a2a;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.tab button.active{
+  background:#ff0055;
+}
+
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#ff0055,#ff6600);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hidden{
+  display:none;
+}
+
+.price{
+  background:#222;
+  padding:15px;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+
+.green{
+  color:#00ff99;
+  font-weight:bold;
+}
+
+.qris img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+
+.note{
+  background:#222;
+  padding:15px;
+  border-radius:14px;
+  color:#ccc;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.loading{
+  display:none;
+  text-align:center;
+  padding:25px;
+}
+
+.loader{
+  width:70px;
+  height:70px;
+  border:7px solid #333;
+  border-top:7px solid #ff0055;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:auto;
+  margin-bottom:20px;
+}
+
+@keyframes spin{
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
+.success{
+  display:none;
+  background:#103322;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  margin-top:20px;
+}
+
+.admin-panel{
+  display:none;
+}
+
+.admin-box{
+  background:#202020;
+  padding:15px;
+  border-radius:14px;
+  margin-top:15px;
+}
+
+.admin-box img{
+  width:100%;
+  border-radius:14px;
+  margin-top:10px;
+}
+
+.admin-actions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.admin-actions button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.approve{
+  background:#00aa55;
+}
+
+.reject{
+  background:#cc0000;
+}
+
+.footer{
+  text-align:center;
+  margin-top:20px;
+  color:#777;
+  font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div style="text-align:center;margin-bottom:15px;">
+<img src="logo.png" style="width:90px;height:90px;border-radius:20px;object-fit:cover;margin-bottom:10px;">
+<h1>Shopee Live Official</h1>
+</div>
+
+<div class="desc">
+Website Untuk Menaikan Viewers Shopee Live Tanpa Menggunakan Password, Akun dijamin aman.
+</div>
+
+<div class="tab">
+<button class="active" onclick="showTab('register',this)">Daftar</button>
+<button onclick="showTab('login',this)">Masuk</button>
+</div>
+
+<div class="form active" id="register">
+
+<div class="input-box">
+<label>Username</label>
+<input type="text" placeholder="Masukkan Username">
+</div>
+
+<div class="input-box">
+<label>Password</label>
+<input type="password" placeholder="Masukkan Password">
+</div>
+
+<div class="input-box">
+<label>Ulangi Password</label>
+<input type="password" placeholder="Ulangi Password">
+</div>
+
+
+
+<button class="btn" onclick="registerSuccess()">
+Daftar
+</button>
+
+</div>
+
+<div class="form" id="login">
+
+<div class="input-box">
+<label>Username</label>
+<input type="text" id="loginUser" placeholder="Masukkan Username">
+</div>
+
+<div class="input-box">
+<label>Password</label>
+<input type="password" id="loginPass" placeholder="Masukkan Password">
+</div>
+
+
+
+<button class="btn" onclick="loginSuccess()">
+Masuk
+</button>
+
+</div>
+
+</div>
+
+<div class="card hidden" id="websitePanel">
+
+<div class="input-box">
+<label>Username Shopee</label>
+<input type="text" placeholder="Masukkan Username Shopee">
+</div>
+
+<div class="input-box">
+<label>Nominal View</label>
+<select id="hargaView" onchange="hitungHarga()">
+<option value="">200 View</option>
+<option value="">500 View</option>
+<option value="">700 View</option>
+<option value="">1.000 View</option>
+</select>
+</div>
+
+<div class="input-box">
+<label>Jam Tayang</label>
+<select id="jamTayang" onchange="hitungHarga()">
+<option value="30000">30 Menit - Rp50.000</option>
+<option value="50000">1 Jam - Rp70.000</option>
+<option value="75000">3 Jam - Rp85.000</option>
+<option value="100000">6 Jam - Rp100.000</option>
+<option value="150000">12 Jam - Rp150.000</option>
+<option value="250000">24 Jam - Rp250.000</option>
+</select>
+</div>
+
+<div class="price">
+<p><b>Shopee Live Official</b></p>
+<br>
+<p>Total Harga: <span class="green" id="totalHarga">Rp50.500</span></p>
+<p>Biaya Admin: <span class="green">Rp500</span></p>
+</div>
+
+<div class="qris">
+<img src="Qris.png">
+</div>
+
+<div class="note">
+Silahkan upload bukti transfer setelah melakukan pembayaran QRIS, Dan Tunggu Konfirmasi Dari Admin.
+</div>
+
+<div class="input-box">
+<label>Upload Bukti Transfer</label>
+<input type="file" id="buktiTransfer" accept="image/*">
+</div>
+
+<button class="btn" onclick="kirimBukti()">
+Kirim Bukti Transfer
+</button>
+
+<div class="loading" id="loadingBox">
+<div class="loader"></div>
+<h3>Menunggu Konfirmasi Admin...</h3>
+<p style="color:#aaa;margin-top:10px;">
+Sistem akan otomatis aktif setelah admin melakukan konfirmasi.
+</p>
+</div>
+
+<div class="success" id="successBox">
+<h2>Pembayaran Diterima</h2>
+<p style="margin-top:10px;">
+Shopee Live berhasil dijalankan.
+</p>
+</div>
+
+</div>
+
+<div class="card admin-panel hidden" id="adminPanel">
+
+<h1>Admin Panel</h1>
+
+<div class="desc">
+Khusus Admin Shopee Live Official
+</div>
+
+<div class="admin-box">
+<h3>Bukti Transfer User</h3>
+
+<img id="previewBukti" src="" style="display:none;">
+
+<div class="admin-actions">
+<button class="approve" onclick="approvePayment()">
+Konfirmasi
+</button>
+
+<button class="reject" onclick="rejectPayment()">
+Batal
+</button>
+</div>
+
+</div>
+
+</div>
+
+<div style="margin-top:25px;display:flex;gap:10px;">
+
+<button class="btn" onclick="shareWhatsApp()">
+Bagikan ke WhatsApp
+</button>
+
+<button class="btn" onclick="copyLink()">
+Salin Link
+</button>
+
+<button class="btn" onclick="shareFacebook()">
+Bagikan ke Facebook
+</button>
+
+</div>
+
+<div class="footer">
+© 2026 Shopee Live Official
+</div>
+
+</div>
+
+<script>
+
+function showTab(tabId,btn){
+
+  document.querySelectorAll('.form').forEach(form=>{
+    form.classList.remove('active');
+  });
+
+  document.getElementById(tabId).classList.add('active');
+
+  document.querySelectorAll('.tab button').forEach(button=>{
+    button.classList.remove('active');
+  });
+
+  btn.classList.add('active');
+}
+
+function registerSuccess(){
+  alert('Pendaftaran berhasil');
+
+  document.querySelector('.card').style.display = 'none';
+
+  document.getElementById('websitePanel').classList.remove('hidden');
+}
+
+function loginSuccess(){
+
+  let user = document.getElementById('loginUser').value;
+  let pass = document.getElementById('loginPass').value;
+
+  if(user === 'orlandoid' && pass === 'admin'){
+
+    document.querySelector('.card').style.display = 'none';
+
+    document.getElementById('adminPanel').style.display = 'block';
+
+    alert('Login Admin Berhasil');
+
+  }else{
+
+    document.querySelector('.card').style.display = 'none';
+
+    document.getElementById('websitePanel').classList.remove('hidden');
+
+    alert('Login User Berhasil');
+  }
+}
+
+function hitungHarga(){
+
+  let hargaJam = parseInt(document.getElementById('jamTayang').value);
+
+  let total = hargaJam + 500;
+
+  document.getElementById('totalHarga').innerHTML =
+  'Rp' + total.toLocaleString('id-ID');
+}
+
+function kirimBukti(){
+
+  let file = document.getElementById('buktiTransfer').files[0];
+
+  if(!file){
+    alert('Silahkan upload bukti transfer');
+    return;
+  }
+
+  let reader = new FileReader();
+
+  reader.onload = function(e){
+
+    document.getElementById('previewBukti').src = e.target.result;
+
+    document.getElementById('previewBukti').style.display = 'block';
+  }
+
+  reader.readAsDataURL(file);
+
+  document.getElementById('loadingBox').style.display = 'block';
+
+  alert('Bukti transfer berhasil dikirim ke admin');
+}
+
+function approvePayment(){
+
+  document.getElementById('loadingBox').style.display = 'none';
+
+  document.getElementById('successBox').style.display = 'block';
+
+  alert('Pembayaran berhasil dikonfirmasi');
+}
+
+function rejectPayment(){
+
+  document.getElementById('loadingBox').style.display = 'none';
+
+  alert('Pembayaran dibatalkan admin');
+}
+
+function shareWhatsApp(){
+
+  let text = encodeURIComponent('Shopee Live Official - Website Promosi Shopee Live');
+
+  window.open('https://wa.me/?text=' + text,'_blank');
+}
+
+function copyLink(){
+
+  navigator.clipboard.writeText(window.location.href);
+
+  alert('Link website berhasil disalin');
+}
+
+function shareFacebook(){
+
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href),'_blank');
+}
+
+</script>
+
+</body>
+</html>
